@@ -17,4 +17,7 @@ interface DAO {
 
     @Query("SELECT * FROM DBDrink WHERE idDrink IN (:userIds)")
     fun loadDrinkById(userIds: String): DBDrink
+
+    @Query("DELETE FROM DBDrink")
+    fun deleteAllDrinks()
 }

@@ -34,7 +34,7 @@ class IngredientsAdapter(var ingredients: ArrayList<String>, var measures: Array
             itemView.ingredient.text = "$count.$itemIngredient"
         }
         fun bindMe(itemMeasure: String) {
-            if (itemMeasure != null) {
+            if (itemMeasure != "null") {
                 itemView.measure.text = itemMeasure
             }
         }

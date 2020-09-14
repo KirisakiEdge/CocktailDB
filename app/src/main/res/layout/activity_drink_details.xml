@@ -77,45 +77,42 @@
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <TextView
-            android:id="@+id/drinkName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="90dp"
-            android:fontFamily="sans-serif-medium"
-            android:lineSpacingExtra="12sp"
-            android:text="MargaritaT"
-            android:textColor="#de000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            <TextView
+                android:id="@+id/drinkName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:fontFamily="sans-serif-medium"
+                android:lineSpacingExtra="12sp"
+                android:textColor="#de000000"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/textView" />
 
-        <TextView
-            android:id="@+id/drinkAlcocholic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:lineSpacingExtra="12sp"
-            android:textColor="#de000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@+id/drinkName"
-            app:layout_constraintTop_toTopOf="@+id/textView4"
-            android:text="AlcoholicT" />
+            <TextView
+                android:id="@+id/drinkAlcocholic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:lineSpacingExtra="12sp"
+                android:textColor="#de000000"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@+id/drinkName"
+                app:layout_constraintTop_toTopOf="@+id/textView4" />
 
-        <TextView
-            android:id="@+id/drinkGlass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:lineSpacingExtra="12sp"
-            android:textColor="#de000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@+id/drinkAlcocholic"
-            app:layout_constraintTop_toTopOf="@+id/textView5"
-            android:text="Cocktail glassT" />
+            <TextView
+                android:id="@+id/drinkGlass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:lineSpacingExtra="12sp"
+                android:textColor="#de000000"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@+id/drinkAlcocholic"
+                app:layout_constraintTop_toTopOf="@+id/textView5" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -171,21 +168,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-        <TextView
-            android:id="@+id/drinkInstruction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:textColor="#de000000"
-            android:textSize="18sp"
-            android:lineSpacingExtra="10sp"
-            android:textStyle="normal"
-            android:text="BlaBla"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
-            app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/drinkInstruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:lineSpacingExtra="10sp"
+                android:textColor="#de000000"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

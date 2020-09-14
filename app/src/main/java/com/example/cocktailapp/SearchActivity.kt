@@ -28,6 +28,7 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnDrinkListener {
     private var adapter: SearchAdapter? = null
     private lateinit var drinksList: DrinksList
     private lateinit var idDrinkForDetails: String
+    val columns = 2
    // private var searchView: androidx.appcompat.widget.SearchView = androidx.appcompat.widget.SearchView(this)
 
     private val client = NetworkService()
@@ -42,7 +43,6 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnDrinkListener {
     }
 
     private fun setupDrinksList() {
-        var columns = 2
         gridLayoutManager = GridLayoutManager(this, columns)
         drinksFound_recycle_view.layoutManager = gridLayoutManager
 
@@ -62,15 +62,12 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnDrinkListener {
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
                 //Toast.makeText(this@SearchActivity, "Looking for $query", Toast.LENGTH_LONG).show()
 
-                val call = client.getService().getDrinksByName(newText.toString())
-                Log.e(TAG, newText.toString())
-                call?.clone()?.enqueue(object : Callback<DrinksList> {
+                val call = client.getService().getDrinksByName(query.toString())
+                Log.e(TAG, query.toString())
+                call.clone().enqueue(object : Callback<DrinksList> {
                     override fun onFailure(call : Call<DrinksList>, t: Throwable) {
                         Log.e(TAG, t.toString())
                         Toast.makeText(this@SearchActivity, "No network connection", Toast.LENGTH_LONG).show()
@@ -96,6 +93,10 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnDrinkListener {
                 //Toast.makeText(this@SearchActivity, "Looking for $newText", Toast.LENGTH_LONG).show()
                 return true
             }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
         })
         return true
     }
@@ -110,12 +111,12 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnDrinkListener {
 
     }
 
-    override fun onBackPressed() {
+/*    override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent(this@SearchActivity, MainActivity::class.java)
         this@SearchActivity.startActivity(intent)
         this@SearchActivity.finish()
-    }
+    }*/
 
 
 }

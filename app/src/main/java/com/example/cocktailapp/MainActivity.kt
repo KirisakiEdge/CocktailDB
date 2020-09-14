@@ -3,21 +3,15 @@ package com.example.cocktailapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.setPadding
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.room.Room
 import com.example.cocktailapp.DB.DataBase
 import com.example.cocktailapp.adapter.MainAdapter
-import com.example.cocktailapp.model.DBDrink
-import com.example.cocktailapp.model.Drink
-import com.example.cocktailapp.model.DrinksList
-import com.google.android.material.snackbar.Snackbar
-
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_seacrh.*
 
 
 class MainActivity : AppCompatActivity(), MainAdapter.OnDrinkListener {
@@ -27,6 +21,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnDrinkListener {
     private val TAG = "MainActivity"
     private lateinit var db: DataBase
     private lateinit var idDrinkForDetails: String
+    private val columns = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,14 +33,21 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnDrinkListener {
         fab.setOnClickListener {
             val mainIntent = Intent(this@MainActivity, SearchActivity::class.java)
             this@MainActivity.startActivity(mainIntent)
-            this@MainActivity.finish()
+            //this@MainActivity.finish()
+        }
+
+        deleteDrinks.setOnClickListener {
+            Thread{  db.dao().deleteAllDrinks()
+                val intent = intent
+                startActivity(intent)
+                finish()
+            }.start()
         }
 
     }
 
-
     private fun setupEmployeeList() {
-        var columns = 2
+
         gridLayoutManager = GridLayoutManager(this, columns)
         drinks_recycle_view.layoutManager = gridLayoutManager
         adapter = MainAdapter(this)
@@ -59,15 +61,17 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnDrinkListener {
     }
 
     private fun loadEmployees(){
-
         Thread {
-            Log.e(TAG, db.dao().drinks().toString())
-            if (db.dao().drinks().isNotEmpty())
-                empty.text = null
-            adapter?.updateData(db.dao().drinks())
-
+            val tempDrink= db.dao().drinks()
+            //Log.e(TAG, db.dao().drinks().toString())
+                if (db.dao().drinks().isNotEmpty()) {
+                    runOnUiThread {
+                        deleteDrinks.visibility = View.VISIBLE
+                        empty.text = null
+                        adapter?.updateData(tempDrink)
+                    }
+                }
         }.start()
-
     }
 
 
@@ -79,7 +83,5 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnDrinkListener {
 
         intent.putExtra("idDrink", idDrinkForDetails)
         this@MainActivity.startActivity(intent)
-        this@MainActivity.finish()
     }
-
 }

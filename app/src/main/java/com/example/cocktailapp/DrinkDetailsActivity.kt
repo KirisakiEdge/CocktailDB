@@ -65,6 +65,7 @@ class DrinkDetailsActivity : AppCompatActivity() {
                     drink = drinks.getDrink()
                     drink.allIngredients()
                     drink.allMeasure()
+
                     supportActionBar!!.title = drink.strDrink
 
                     drinkImageDet.load(drink.strDrinkThumb){
@@ -89,7 +90,7 @@ class DrinkDetailsActivity : AppCompatActivity() {
                             dbDrink.measure = drink.measure
                             dbDrink.strInstructions= drink.strInstructions
                             db.dao().saveNewDrink(dbDrink)
-                            Log.e("DBDBDBBDBDBD", db.dao().drinks().toString())
+                            // Log.e("DBDBDBBDBDBD", db.dao().drinks().toString())
                         }
                     }.start()
 
@@ -97,11 +98,7 @@ class DrinkDetailsActivity : AppCompatActivity() {
                     Log.e(TAG, response.toString())
                     Toast.makeText(this@DrinkDetailsActivity, "Get employees failed2", Toast.LENGTH_LONG).show()
                 }
-
             }
-
         })
-
     }
-
 }

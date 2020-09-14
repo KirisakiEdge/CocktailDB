@@ -63,10 +63,10 @@ class DrinkDetailsForDbActivity : AppCompatActivity() {
         }.start()
     }
 
-    override fun onPause() {
+/*    override fun onPause() {
         super.onPause()
         val mainIntent = Intent(this@DrinkDetailsForDbActivity, MainActivity::class.java)
         this@DrinkDetailsForDbActivity.startActivity(mainIntent)
         this@DrinkDetailsForDbActivity.finish()
-    }
+    }*/
 }
