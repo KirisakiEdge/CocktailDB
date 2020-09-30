@@ -47,7 +47,6 @@ class DrinkDetailsActivity : AppCompatActivity() {
         idDrink = arguments!!["idDrink"].toString()
         //Log.e(TAG, idDrink)
         loadDrink()
-        ////
     }
 
     private fun loadDrink(){
