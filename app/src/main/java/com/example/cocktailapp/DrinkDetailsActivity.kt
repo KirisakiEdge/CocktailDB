@@ -77,7 +77,6 @@ class DrinkDetailsActivity : AppCompatActivity() {
                     ingredient.layoutManager = linearLayoutManager
                     adapter = IngredientsAdapter(drink.ingredients, drink.measure)
                     ingredient.adapter = adapter
-                    drinkInstruction.text = drink.strInstructions
 
                     Thread{
                         if (dbDrink.idDrink !=  drink.idDrink){
