@@ -14,7 +14,7 @@ import com.example.cocktailapp.adapter.MainAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), MainAdapter.OnDrinkListener {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var gridLayoutManager: GridLayoutManager
     private var adapter: MainAdapter? = null
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnDrinkListener {
 
         gridLayoutManager = GridLayoutManager(this, columns)
         drinks_recycle_view.layoutManager = gridLayoutManager
-        adapter = MainAdapter(this)
+        adapter = MainAdapter()
         drinks_recycle_view.adapter = adapter
 
     }
@@ -74,14 +74,4 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnDrinkListener {
         }.start()
     }
 
-
-    override fun onDrinkClick(position:Int, idDrink: ArrayList<String>) {
-
-        val intent = Intent(this@MainActivity, DrinkDetailsForDbActivity::class.java)
-        idDrinkForDetails = idDrink[position]
-       // Log.e(TAG, idDrinkForDetails)
-
-        intent.putExtra("idDrink", idDrinkForDetails)
-        this@MainActivity.startActivity(intent)
-    }
 }

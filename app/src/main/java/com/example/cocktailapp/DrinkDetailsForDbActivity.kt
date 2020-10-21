@@ -40,13 +40,14 @@ class DrinkDetailsForDbActivity : AppCompatActivity() {
         val arguments = intent.extras
         idDrink = arguments!!["idDrink"].toString()
         db = Room.databaseBuilder(applicationContext, DataBase::class.java, "DBDrink").build()
-        //Log.e(TAG, idDrink)
+
         loadDrink()
     }
 
     private fun loadDrink() {
         Thread {
             dbDrink = db.dao().loadDrinkById(idDrink)
+            Log.e(TAG, dbDrink.idDrink)
             supportActionBar!!.title = dbDrink.strDrink
             Log.e("SHHHHIIIIIT", drink.measure.toString())
 

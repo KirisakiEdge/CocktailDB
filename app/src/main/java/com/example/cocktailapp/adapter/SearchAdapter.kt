@@ -1,28 +1,32 @@
 package com.example.cocktailapp.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.size.Scale
 import coil.transform.RoundedCornersTransformation
+import com.example.cocktailapp.DrinkDetailsActivity
 import com.example.cocktailapp.R
 import com.example.cocktailapp.databinding.ItemDrinkBinding
 import com.example.cocktailapp.model.Drink
+import com.example.cocktailapp.model.DrinksList
 
 
-class SearchAdapter(private val onDrinkListener: OnDrinkListener): RecyclerView.Adapter<SearchAdapter. SearchViewHolder>(){
+class SearchAdapter() : RecyclerView.Adapter<SearchAdapter. SearchViewHolder>(){
 
     private var drinks = ArrayList<Drink>()
     private val TAG = "MAAAAAAAAAAAAAX"
+    private lateinit var idDrinkForDetails: String
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  SearchViewHolder {
         val binding: ItemDrinkBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context), R.layout.item_drink, parent, false)
-        return SearchViewHolder(binding, onDrinkListener)
+        return SearchViewHolder(binding, parent.context)
     }
 
     override fun getItemCount(): Int {
@@ -41,29 +45,26 @@ class SearchAdapter(private val onDrinkListener: OnDrinkListener): RecyclerView.
         notifyDataSetChanged()
     }
 
-    inner class SearchViewHolder(private val binding: ItemDrinkBinding, private val onDrinkListener: OnDrinkListener) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+    inner class SearchViewHolder(private val binding: ItemDrinkBinding, val context: Context) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(drink: Drink) {
             binding.drinkName.text = drink.strDrink
-            binding.drinkImage.load(drink.strDrinkThumb){
+            binding.drinkImage.load(drink.strDrinkThumb) {
                 transformations(RoundedCornersTransformation(25f))
                 scale(Scale.FILL)
             }
-            itemView.setOnClickListener(this)
+            itemView.setOnClickListener {
+                val intent = Intent(context, DrinkDetailsActivity::class.java)
+                idDrinkForDetails = drink.idDrink
+                //Log.e(TAG, idDrinkForDetails)
+
+                intent.putExtra("idDrink", idDrinkForDetails)
+                context.startActivity(intent)
+
+            }
         }
-
-        override fun onClick(v: View?) {
-            onDrinkListener.onDrinkClick(adapterPosition)
-
-        }
-
-
-    }
-
-    interface OnDrinkListener{
-        fun onDrinkClick(position: Int)
     }
 }
 

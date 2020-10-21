@@ -2,18 +2,14 @@ package com.example.cocktailapp
 
 import android.app.SearchManager
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.Menu
-import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.setPadding
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cocktailapp.adapter.SearchAdapter
+import com.example.cocktailapp.model.DBDrink
 import com.example.cocktailapp.model.DrinksList
 import com.example.cocktailapp.networking.NetworkService
 import kotlinx.android.synthetic.main.activity_seacrh.*
@@ -22,12 +18,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
-class SearchActivity : AppCompatActivity(), SearchAdapter.OnDrinkListener {
+class SearchActivity : AppCompatActivity() {
 
+    private var drinks = ArrayList<DrinksList>()
     private lateinit var gridLayoutManager: GridLayoutManager
     private var adapter: SearchAdapter? = null
     private lateinit var drinksList: DrinksList
-    private lateinit var idDrinkForDetails: String
+
     val columns = 2
    // private var searchView: androidx.appcompat.widget.SearchView = androidx.appcompat.widget.SearchView(this)
 
@@ -46,7 +43,7 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnDrinkListener {
         gridLayoutManager = GridLayoutManager(this, columns)
         drinksFound_recycle_view.layoutManager = gridLayoutManager
 
-        adapter = SearchAdapter(this)
+        adapter = SearchAdapter()
         drinksFound_recycle_view.adapter = adapter
 
     }
@@ -101,15 +98,6 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnDrinkListener {
         return true
     }
 
-    override fun onDrinkClick(position: Int) {
-        val intent = Intent(this@SearchActivity, DrinkDetailsActivity::class.java)
-        idDrinkForDetails = drinksList.getIdByPosition(position)
-        //Log.e(TAG, idDrinkForDetails)
-
-        intent.putExtra("idDrink", idDrinkForDetails)
-        this@SearchActivity.startActivity(intent)
-
-    }
 
 /*    override fun onBackPressed() {
         super.onBackPressed()
